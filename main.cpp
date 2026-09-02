@@ -64,18 +64,35 @@ std::cin >> choice;
 
 // new for loop for the mines
 if (choice == 4) {
+
+    while (choice != 2) {
     std::cout << "=== The Mines ===\n";
     std::cout << "1. Start mining""\n";
     std::cout << "2. exit""\n";
     std::cin >> choice;
 
-if (choice = 2) {
-    return 0;
+if (choice == 1) {
+    std::cout << "Enjoy the mines!";
 }
+
+else if (choice == 2){
+    std::cout << "Thanks for visting";
+}
+
+
+//this is for later
+
+
+    }
     for (int i = 0; i < 5; i++) {
         
     }
 }
+
+// lllllllllllllllllllllllllll
+
+
+
 
 else {
     int index = choice - 1; //this makes sure that the number the user selected alligns with what they get
