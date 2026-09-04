@@ -25,6 +25,7 @@ int main(){
 
     srand(static_cast<unsigned int> (time(0))); //im converting time to an unsigned int becuase time(0) allows negitive numbers but srand doesnt and an unsigned int only allows postive numbers and zero. This prevents complier warnings
 
+    
     item inventory [3] { //stores a single data type under one name and can be accessed under index
         {"Iron Sword",15},
         {"Wooden Shield",10},
@@ -80,17 +81,12 @@ int minechoice = 0; // making a new choice of the mines to allow a choice in the
     std::cin >> minechoice; // this is then asking for the users choice to either leave or go mining
 
 if (minechoice == 1) { // if the user choice is equal to 1 then print
-    std::cout << "Enjoy the mines!""\n";
+    int randomIndex = rand() % 5; //randomIdex = genarate a random number. % 5 means it only has 5 numbers to pick from which is 0-4
+    wallet += ore[randomIndex].value; //wallet plus the value of the random ore that was given
 
-// this is where the mining will go
-
-for (int i = 0; i < 5; i++) {
-    wallet += ore[i].value; // This adds the ore value from the array that stores the name and the value
-
-    std::cout << ". " << "you mined " << ore[i].mining << " Total Wallet: $ " << wallet << "\n"; // this prints the ore which is the array and the mining which is the struct and then it prints the wallet total
-
-} // this closes the for loop
-
+    std::cout << "You swung your pickaxe and found: "
+    << ore[randomIndex].mining << "($: " << ore[randomIndex].value << ")" << "\n"; // this prints the name of the ore and the value based on the number genareted
+    std::cout << "Total wallet: $" << wallet << "\n";
 }
 
 else if (minechoice == 2){ // if the user choice is 2 then print
