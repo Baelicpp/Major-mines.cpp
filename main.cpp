@@ -3,6 +3,7 @@
 #include <cstdlib> // This gives me access to the rand() function which gernates random numbers and the srand() function which generates a seed for rand
 #include <ctime> // This works with the local time on the pc so if its passed into srand then the seed constantly changes
 
+
 int wallet = 0; //making sure wallet value starts at 0
 
 struct item{ //stores diffrent data types under one name to be called to later
@@ -21,7 +22,11 @@ struct mine {
 };
 
 
+void mineOre(int& wallet); //return nothing but get the memory address of the wallet
+
 int main(){
+
+
 
     srand(static_cast<unsigned int> (time(0))); //im converting time to an unsigned int becuase time(0) allows negitive numbers but srand doesnt and an unsigned int only allows postive numbers and zero. This prevents complier warnings
 
@@ -38,13 +43,6 @@ int main(){
         {"Healing", 25}
     };
 
-    mine ore [5] {
-        {"Dirt", 1},
-        {"Stone", 3},
-        {"Coal", 5},
-        {"Iron", 8},
-        {"Gold", 10},
-    };
 
 
 int choice = 0; //starts value of the user choice on 0
@@ -81,13 +79,13 @@ int minechoice = 0; // making a new choice of the mines to allow a choice in the
     std::cin >> minechoice; // this is then asking for the users choice to either leave or go mining
 
 if (minechoice == 1) { // if the user choice is equal to 1 then print
-    int randomIndex = rand() % 5; //randomIdex = genarate a random number. % 5 means it only has 5 numbers to pick from which is 0-4
-    wallet += ore[randomIndex].value; //wallet plus the value of the random ore that was given
 
-    std::cout << "You swung your pickaxe and found: "
-    << ore[randomIndex].mining << "($: " << ore[randomIndex].value << ")" << "\n"; // this prints the name of the ore and the value based on the number genareted
-    std::cout << "Total wallet: $" << wallet << "\n";
+    mineOre(wallet); {
+
+    }
+
 }
+    
 
 else if (minechoice == 2){ // if the user choice is 2 then print
     std::cout << "Thanks for visting""\n";
@@ -119,4 +117,26 @@ else {
 
 
 }
+return 0;
+
+
+//mining function outside of main
+
+}
+    void mineOre(int& wallet) { //the function now hold all of the mining code
+    mine ore[5] {
+        {"Dirt", 1},
+        {"Stone", 3},
+        {"Coal", 5},
+        {"Iron", 8},
+        {"Gold", 10},
+    };
+    
+
+    int randomIndex = rand() % 5; //randomIdex = genarate a random number. % 5 means it only has 5 numbers to pick from which is 0-4
+    wallet += ore[randomIndex].value; //wallet plus the value of the random ore that was given
+
+    std::cout << "You swung your pickaxe and found: "
+    << ore[randomIndex].mining << "($: " << ore[randomIndex].value << ")" << "\n"; // this prints the name of the ore and the value based on the number genareted
+    std::cout << "Total wallet: $" << wallet << "\n";
 }
