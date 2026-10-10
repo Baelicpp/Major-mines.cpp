@@ -7,6 +7,8 @@
 int wallet = 0; //making sure wallet value starts at 0
 int health = 100;
 int stamina = 100;
+int goblinRoll = 0;
+int goblinHealth = 100;
 
 
 struct goblin
@@ -41,7 +43,7 @@ int main(){
     goblin options [3] {
         {"Attack", 20},
         {"Defend", 15},
-        {"Heal", 25},
+        {"Heal", 25}
     };
 
     item inventory [4] { //stores a single data type under one name and can be accessed under index
@@ -95,36 +97,65 @@ int minechoice = 0; // making a new choice of the mines to allow a choice in the
 
 // this is where the combat starts
 
-   int goblinRoll = rand() % 10;
-   if (goblinRoll == 0) {
-    std::cout << "You have encountered a goblin\n";
-
-    for (int i = 0; i < 3; i++) {
-        std::cout << (i + 1) <<". " << options[i].type << "\n";
-    }
-
-return 1;
-   }
-
-
-
-
-
 
 if (minechoice == 1) { // if the user choice is equal to 1 then print
 
     mineOre(wallet, stamina); {
+
+        if (goblinRoll == 0) {
+
+    int goblinChoice = 0;
+
+     int goblinRoll = rand() % 10;
+    
+
+    while (goblinRoll > 0) {
+    std::cout << "You have encountered a goblin\n";
+    std::cout << "1. Fight""\n";
+    std::cout << "2. Flee (cost 25 stamina)""\n";
+    std::cin >> goblinChoice;
+
+    if (goblinChoice == 1) { // if the user choice is to fight then print the options
+
+    std::cout << "\n" << "=== Player health: " << health << "===" << "\n";
+
+        std::cout << "\n" << "Goblin Health: " << goblinHealth << "\n\n";
+        
+    for (int i = 0; i < 3; i++) {
+        std::cout << (i + 1) <<". " << options[i].type << "\n";
+    }
+    std::cin >> goblinChoice;
+
+    if (goblinChoice == 1) {
+        std::cout << "You choice too attack ";
+    }
+    if (goblinChoice == 2) {
+        std::cout << "you got scared and ran";
+        stamina -= 25;
+        break;
+    }
+
+  
 
     }
 
 }
     
 
-else if (minechoice == 2){ // if the user choice is 2 then print
+if (minechoice == 2) { // if the user choice is 2 then print
     std::cout << "Thanks for visting""\n";
 }
     }
 }
+
+
+
+}
+
+    }
+}
+
+
 
 else{
     int index = choice - 1; //this makes sure that the number the user selected alligns with what they get
@@ -195,4 +226,10 @@ stamina -= staminaCost; //minus the amout off the cost which is 10
 // give the player the option to use the items they have bought like press 1. to attack with iron sword 2. block with wooden shield 3. heal with bandage
 // player needs health
 // make is so the user can flee but it cost 25 stamina
-// make it so the code doesnt end when they get into an encounter
+
+
+
+
+// make it so flee does something and returns the user back to the shop
+
+// if you attack and then press 2 it then breaks and takes you back to the mines but if you try and flee normally it will just loop
