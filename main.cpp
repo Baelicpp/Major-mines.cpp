@@ -8,7 +8,7 @@ int wallet = 0; //making sure wallet value starts at 0
 int health = 100;
 int stamina = 100;
 int goblinRoll = 0;
-int goblinHealth = 100;
+
 
 
 struct goblin
@@ -34,6 +34,7 @@ struct mine {
 
 
 void mineOre(int& wallet, int& stamina); //return nothing but get the memory address of the wallet and stamina
+bool handleGoblin(int& stamina, int& health, int&, bool& feldToShop);
 int main(){
 
 
@@ -97,19 +98,18 @@ int minechoice = 0; // making a new choice of the mines to allow a choice in the
 
 // this is where the combat starts
 
-
 if (minechoice == 1) { // if the user choice is equal to 1 then print
 
-    mineOre(wallet, stamina); {
+    mineOre(wallet, stamina); 
 
-        if (goblinRoll == 0) {
+    int goblinRoll = rand() % 10;
 
+    if (goblinRoll == 0) {
+    int goblinHealth = 100;
     int goblinChoice = 0;
-
-     int goblinRoll = rand() % 10;
     
 
-    while (goblinRoll > 0) {
+    while (goblinHealth > 0) {
     std::cout << "You have encountered a goblin\n";
     std::cout << "1. Fight""\n";
     std::cout << "2. Flee (cost 25 stamina)""\n";
@@ -118,40 +118,45 @@ if (minechoice == 1) { // if the user choice is equal to 1 then print
     if (goblinChoice == 1) { // if the user choice is to fight then print the options
 
     std::cout << "\n" << "=== Player health: " << health << "===" << "\n";
+    std::cout << "\n" << "Goblin Health: " << goblinHealth << "\n\n";
+    
+    goblin options[3] {
+    {"Attack", 20},
+    {"Defend", 15},
+    {"Heal", 25}
+};
+for (int i = 0; i < 3; i++) {
+std::cout << (i + 1) << ". " << options[i].type << "\n";
+}
 
-        std::cout << "\n" << "Goblin Health: " << goblinHealth << "\n\n";
-        
-    for (int i = 0; i < 3; i++) {
-        std::cout << (i + 1) <<". " << options[i].type << "\n";
+
+int attackChoice = 0;
+std::cin >> attackChoice;
+
+
+if (attackChoice == 1) {
+    std::cout << "You choice too attack ";
+    goblinHealth -= 20;
+}
+
+else if (attackChoice == 2) {
+        std::cout << "You defended against that attack";
+        stamina -= 15;
     }
-    std::cin >> goblinChoice;
-
-    if (goblinChoice == 1) {
-        std::cout << "You choice too attack ";
+}
+else if (goblinChoice == 2) {
+    std::cout << "You got scared and fled back to the shop\n";
+    stamina -=25;
+    break;
     }
-    if (goblinChoice == 2) {
-        std::cout << "you got scared and ran";
-        stamina -= 25;
-        break;
-    }
-
-  
-
-    }
-
 }
     
 
 if (minechoice == 2) { // if the user choice is 2 then print
     std::cout << "Thanks for visting""\n";
-}
-    }
-}
-
-
-
-}
-
+                }
+            }
+        }
     }
 }
 
@@ -194,6 +199,7 @@ return 0;
 
 }
 
+
 void mineOre(int& wallet, int& stamina) {
     int staminaCost = 10;
 
@@ -203,6 +209,8 @@ void mineOre(int& wallet, int& stamina) {
     }
 
 stamina -= staminaCost; //minus the amout off the cost which is 10
+
+
 
     mine ore[5] {
         {"Dirt", 1},
@@ -220,6 +228,7 @@ stamina -= staminaCost; //minus the amout off the cost which is 10
     << ore[randomIndex].mining << "($: " << ore[randomIndex].value << ")" << "\n"; // this prints the name of the ore and the value based on the number genareted
     std::cout << "Stamina left: " << stamina <<  " | Total wallet: $" << wallet << "\n";
 } 
+
 
 
 // if the player dies they get full reset like hardcore
