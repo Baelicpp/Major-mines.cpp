@@ -135,20 +135,33 @@ std::cin >> attackChoice;
 
 
 if (attackChoice == 1) {
-    std::cout << "You choice too attack ";
+    std::cout << "You choice too attack\n";
     goblinHealth -= 20;
-}
 
-else if (attackChoice == 2) {
-        std::cout << "You defended against that attack";
-        stamina -= 15;
-    }
+if (goblinHealth <= 20) {
+    std::cout << "You won the fight\n";
+    break;
 }
+}
+    }
+    
 else if (goblinChoice == 2) {
     std::cout << "You got scared and fled back to the shop\n";
     stamina -=25;
     break;
     }
+}
+
+if (goblinHealth > 0){
+    int goblinDamage = 15;
+    std::cout << "\nThe goblin strikes back and deals " << goblinDamage << " damage to you!\n";
+    health -= goblinDamage;
+    std::cout << "Your health is now: " << health << "\n\n";
+}
+
+else {
+    std::cout << "You got defeated by the goblin";
+    return 1;
 }
     
 
@@ -234,11 +247,4 @@ stamina -= staminaCost; //minus the amout off the cost which is 10
 // if the player dies they get full reset like hardcore
 // give the player the option to use the items they have bought like press 1. to attack with iron sword 2. block with wooden shield 3. heal with bandage
 // player needs health
-// make is so the user can flee but it cost 25 stamina
 
-
-
-
-// make it so flee does something and returns the user back to the shop
-
-// if you attack and then press 2 it then breaks and takes you back to the mines but if you try and flee normally it will just loop
