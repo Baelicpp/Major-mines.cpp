@@ -121,7 +121,7 @@ if (minechoice == 1) { // if the user choice is equal to 1 then print
     std::cout << "\n" << "Goblin Health: " << goblinHealth << "\n\n";
     
     goblin options[3] {
-    {"Attack", 20},
+    {"Attack", 15},
     {"Defend", 15},
     {"Heal", 25}
 };
@@ -136,12 +136,18 @@ std::cin >> attackChoice;
 
 if (attackChoice == 1) {
     std::cout << "You choice too attack\n";
-    goblinHealth -= 20;
+    goblinHealth -= 15;
 
-if (goblinHealth <= 20) {
-    std::cout << "You won the fight\n";
-    break;
-}
+    if (goblinHealth < 0) { 
+        int goblinReward = 40;
+        wallet += goblinReward;
+        std::cout << "\n*** YOU DEFEATED THE GOBLIN! ***\n";
+        std::cout << "You found : $" << goblinReward << "\n";
+        std::cout << "Total wallet: $" << wallet << "\n"; 
+
+    }
+
+
 }
     }
     
@@ -161,7 +167,7 @@ if (goblinHealth > 0){
 
 else {
     std::cout << "You got defeated by the goblin";
-    return 1;
+    break;
 }
     
 
