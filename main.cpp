@@ -82,8 +82,12 @@ for (int i = 0; i < 4; i++) { //counts from 1 to 3
 
 std::cout << "5. Mining: ";
 
-std::cin >> choice; //cin is for character input and choice is the variable being called upon
-
+if (!(std::cin >> choice)) { // ! means NOT in c++ so this means if the user inputs a invalid character then print
+    std::cout << "\n Invalid input! Please enter a number from 1 to 5.\n";
+    std::cin.clear(); //this stops the app from just stopping due to the invalid input, it will clear the error and allow new text
+    std::cin.ignore(32767, '\n');
+    continue; // this restarts the loop making it so it always checks for a valid input
+} 
 
 // new for loop for the mines
 if (choice == 5) {  // double == is for comparing and one = is for assiging
@@ -254,3 +258,4 @@ stamina -= staminaCost; //minus the amout off the cost which is 10
 // give the player the option to use the items they have bought like press 1. to attack with iron sword 2. block with wooden shield 3. heal with bandage
 // player needs health
 
+// add a save and load system
